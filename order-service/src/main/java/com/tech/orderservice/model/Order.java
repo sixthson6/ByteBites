@@ -6,23 +6,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name = "t_orders")
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@Table(name = "orders")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String orderNumber;
-    private Long customerId;
-    private BigDecimal totalAmount;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<OrderLineItems> orderLineItems;
+    private List<OrderLineItem> orderLineItems;
 }
