@@ -1,0 +1,23 @@
+### Register a new user
+POST http://localhost:8089/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "test",
+  "lastName": "user",
+  "email": "test@user.com",
+  "password": "password"
+}
+
+### Login user
+POST http://localhost:8089/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@user.com",
+  "password": "password"
+}
+
+### Validate token
+GET http://localhost:8089/api/v1/auth/validate?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QHVzZXIuY29tIiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdLCJpYXQiOjE3NTE4NDgxMzMsImV4cCI6MTc1MTkzNDUzM30.sbuipb9AWU03NOTPIuJePqHJQkQCZT2l6pwAkvwXYzk
+Accept: application/json

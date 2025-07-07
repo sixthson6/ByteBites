@@ -1,0 +1,125 @@
+### IMPORTANT: HOW TO USE THIS FILE
+# 1. Run the 'Login to get JWT token' request below.
+# 2. After it executes, copy the 'accessToken' value from the response.
+# 3. Paste this 'accessToken' value into all 'YOUR_JWT_TOKEN_HERE' placeholders in the subsequent requests.
+#    (You will need to replace 'YOUR_JWT_TOKEN_HERE' manually for each request.)
+
+### Login to get JWT token
+# @name loginUser
+POST http://localhost:8089/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@user.com",
+  "password": "password"
+}
+
+### Create a new order
+# @name createOrder
+POST http://localhost:8089/api/v1/orders
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "restaurantId": 1,
+  "totalAmount": 40.50,
+  "status": "PENDING",
+  "orderItems": [
+    {
+      "productId": 101,
+      "quantity": 2,
+      "price": 12.50
+    },
+    {
+      "productId": 102,
+      "quantity": 1,
+      "price": 15.50
+    }
+  ]
+}
+
+### Create another order
+# @name createOrder2
+POST http://localhost:8089/api/v1/orders
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+{
+  "customerId": 3,
+  "restaurantId": 2,
+  "totalAmount": 25.00,
+  "status": "PENDING",
+  "orderItems": [
+    {
+      "productId": 201,
+      "quantity": 1,
+      "price": 25.00
+    }
+  ]
+}
+
+### Get all orders
+# @name getAllOrders
+GET http://localhost:8089/api/v1/orders
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+### Get a single order by its ID
+# Note: Change the '1' to the actual ID of the order you want to retrieve.
+# @name getOrderById
+GET http://localhost:8089/api/v1/orders/1
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+### Update an order by its ID
+# Note: Change the '1' to the actual ID of the order you want to update.
+PUT http://localhost:8089/api/v1/orders/1
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+{
+  "customerId": 1,
+  "restaurantId": 1,
+  "totalAmount": 45.00,
+  "status": "CONFIRMED",
+  "orderItems": [
+    {
+      "productId": 101,
+      "quantity": 2,
+      "price": 12.50
+    },
+    {
+      "productId": 102,
+      "quantity": 1,
+      "price": 15.50
+    }
+  ]
+}
+
+### Delete an order by its ID
+# Note: Change the '1' to the actual ID of the order you want to delete.
+DELETE http://localhost:8089/api/v1/orders/1
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+### Create an order to test Kafka event publishing
+# @name createOrderKafkaTest
+POST http://localhost:8089/api/v1/orders
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+{
+  "customerId": 3,
+  "restaurantId": 3,
+  "totalAmount": 55.75,
+  "status": "PENDING",
+  "orderItems": [
+    {
+      "productId": 301,
+      "quantity": 1,
+      "price": 30.00
+    },
+    {
+      "productId": 302,
+      "quantity": 2,
+      "price": 12.875
+    }
+  ]
+}

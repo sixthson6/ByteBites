@@ -1,0 +1,106 @@
+### IMPORTANT: HOW TO USE THIS FILE
+# 1. Run the 'Login to get JWT token' request below.
+# 2. After it executes, copy the 'accessToken' value from the response.
+# 3. Paste this 'accessToken' value into all 'YOUR_JWT_TOKEN_HERE' placeholders in the subsequent requests.
+#    (You will need to replace 'YOUR_JWT_TOKEN_HERE' manually for each request.)
+
+### Login to get JWT token
+# @name loginUser
+POST http://localhost:8089/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@user.com",
+  "password": "password"
+}
+
+### Create a new restaurant with a menu
+POST http://localhost:8089/api/v1/restaurants
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QHVzZXIuY29tIiwicm9sZXMiOlsiUk9MRV9DVVNUT01FUiJdLCJpYXQiOjE3NTE4NDgzNzUsImV4cCI6MTc1MTkzNDc3NX0.PXPs4rceAshBPqKCOFd1sjXfy0mJTCNPSMYbDHubG7U
+
+{
+  "name": "The Grand Bistro",
+  "address": "456 Culinary Avenue, Metro City",
+  "menu": [
+    {
+      "name": "Steak Frites",
+      "description": "Perfectly grilled steak served with a side of crispy french fries.",
+      "price": 28.00
+    },
+    {
+      "name": "French Onion Soup",
+      "description": "A rich and savory soup with a cheesy crust.",
+      "price": 9.50
+    }
+  ]
+}
+
+### Create a second restaurant
+POST http://localhost:8089/api/v1/restaurants
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+{
+  "name": "Burger Joint",
+  "address": "123 Main Street, Anytown",
+  "menu": [
+    {
+      "name": "Classic Burger",
+      "description": "A juicy beef patty with lettuce, tomato, and our special sauce.",
+      "price": 10.00
+    },
+    {
+      "name": "Fries",
+      "description": "Golden, crispy, and perfectly salted.",
+      "price": 3.00
+    }
+  ]
+}
+
+### Create a third restaurant
+POST http://localhost:8089/api/v1/restaurants
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+{
+  "name": "Pizza Place",
+  "address": "789 Oak Avenue, Pizzaville",
+  "menu": [
+    {
+      "name": "Pepperoni Pizza",
+      "description": "A classic pepperoni pizza.",
+      "price": 15.00
+    },
+    {
+      "name": "Cheese Pizza",
+      "description": "Simple and delicious cheese pizza.",
+      "price": 12.00
+    }
+  ]
+}
+
+### Get all restaurants
+GET http://localhost:8089/api/v1/restaurants
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+### Get a single restaurant by its ID
+# Note: Change the '1' to the actual ID of the restaurant you want to retrieve.
+GET http://localhost:8089/api/v1/restaurants/1
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+### Update a restaurant by its ID
+# Note: Change the '1' to the actual ID of the restaurant you want to update.
+PUT http://localhost:8089/api/v1/restaurants/1
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+{
+  "name": "The Grand Bistro Updated",
+  "address": "New Address, New City"
+}
+
+### Delete a restaurant by its ID
+# Note: Change the '1' to the actual ID of the restaurant you want to delete.
+DELETE http://localhost:8089/api/v1/restaurants/1
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
