@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Spring Boot's default base.xml provides default console appender and pattern -->
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!-- Define a custom console appender for better readability and to include MDC -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- Pattern includes timestamp, thread, log level, logger name, and the message -->
+            <!-- %d{yyyy-MM-dd HH:mm:ss.SSS} : Date and time
+                 %thread : Thread name
+                 %-5level : Log level (e.g., INFO, DEBUG)
+                 %logger{36} : Logger name, truncated to 36 characters
+                 %msg%n : The log message followed by a newline
+                 %ex{full} : Prints the full stack trace for exceptions (only for ERROR level by default)
+            -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n%ex{full}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- You can define a file appender for persistent logs -->
+    <!--
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/restaurant-api.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/restaurant-api.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n%ex{full}</pattern>
+        </encoder>
+    </appender>
+    -->
+
+    <!-- Root logger configuration -->
+    <!-- Sets the default logging level for all loggers -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <!-- <appender-ref ref="FILE"/> Uncomment to enable file logging -->
+    </root>
+
+    <!-- Specific logger configurations -->
+    <!-- You can set different log levels for specific packages -->
+    <logger name="com.bytebites.restaurant" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <!-- <appender-ref ref="FILE"/> -->
+    </logger>
+
+    <!-- Example: To see detailed SQL queries from Hibernate/JPA -->
+    <!--
+    <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    -->
+
+    <!-- Suppress verbose logging from Spring frameworks if desired -->
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.apache.coyote.http11" level="WARN"/>
+
+</configuration>
