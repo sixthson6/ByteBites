@@ -3,7 +3,7 @@
 
 ## Overview
 
-This document provides a detailed code review of the ByteBiteRestaurants project. The review covers the microservice design, use of Spring Boot and Spring Cloud, security, messaging integration, service discovery, configuration, and Docker setup.
+This document provides a detailed code review of the Huvison Yaw Collin's ByteBiteRestaurants project. The review covers the microservice design, use of Spring Boot and Spring Cloud, security, messaging integration, service discovery, configuration, and Docker setup.
 
 ## 1. Microservice Design and Structure
 
