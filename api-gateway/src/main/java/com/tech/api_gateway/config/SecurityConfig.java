@@ -30,8 +30,7 @@ public class SecurityConfig {
                         .pathMatchers("/eureka/**").permitAll()
                         .anyExchange().authenticated()
                 )
-                .httpBasic(withDefaults())
-                .formLogin(withDefaults())
+                .addFilterAt(jwtAuthenticationFilter, org.springframework.security.config.web.server.SecurityWebFiltersOrder.AUTHENTICATION)
                 .build();
     }
 }
