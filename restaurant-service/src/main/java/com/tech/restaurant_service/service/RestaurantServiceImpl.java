@@ -11,16 +11,19 @@ import com.tech.restaurant_service.exception.ResourceNotFoundException;
 import com.tech.restaurant_service.repository.ProductRepository;
 import com.tech.restaurant_service.repository.RestaurantRepository;
 import org.modelmapper.ModelMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class RestaurantServiceImpl implements RestaurantService {
 
     private static final Logger logger = LoggerFactory.getLogger(RestaurantServiceImpl.class);
@@ -126,7 +129,7 @@ public class RestaurantServiceImpl implements RestaurantService {
                     }
                     menuItem.setName(productRequest.getName());
                     menuItem.setDescription(productRequest.getDescription());
-                    menuItem.setPrice(productRequest.getPrice());
+                    menuItem.setPrice(BigDecimal.valueOf(productRequest.getPrice()));
                     Product updated = productRepository.save(menuItem);
                     logger.info("Menu item ID {} for restaurant ID {} updated successfully", menuItemId, restaurantId);
                     return modelMapper.map(updated, ProductResponse.class);
